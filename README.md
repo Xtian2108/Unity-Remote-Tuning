@@ -24,13 +24,13 @@ Unity Remote Tuning is a runtime tuning tool for Unity that lets you adjust game
 Open your Unity project, go to **Window > Package Manager**, click the **+** button and choose **Add package from git URL**, then paste:
 
 ```
-https://github.com/Kalimist/Unity-Remote-Tuning.git
+https://github.com/xtian2108/Unity-Remote-Tuning.git
 ```
 
 To lock to a specific version, append the tag:
 
 ```
-https://github.com/Kalimist/Unity-Remote-Tuning.git#v1.0.0
+https://github.com/xtian2108/Unity-Remote-Tuning.git#v1.0.0
 ```
 
 Alternatively, add the entry directly to your project's `Packages/manifest.json`:
@@ -38,7 +38,7 @@ Alternatively, add the entry directly to your project's `Packages/manifest.json`
 ```json
 {
   "dependencies": {
-    "com.kalimist.unity-remote-tuning": "https://github.com/Kalimist/Unity-Remote-Tuning.git",
+    "com.xtian2108.unity-remote-tuning": "https://github.com/xtian2108/Unity-Remote-Tuning.git",
     ...
   }
 }

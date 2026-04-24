@@ -1,0 +1,23 @@
+﻿{
+  "name": "com.kalimist.unity-remote-tuning",
+  "version": "1.0.0",
+  "displayName": "Unity Remote Tuning",
+  "description": "Runtime tuning tool for Unity. Adjust game variables from a mobile device in real time over a local WebSocket connection, with QR code pairing, presets and change history.",
+  "unity": "2020.3",
+  "unityRelease": "0f1",
+  "license": "MIT",
+  "licensesUrl": "https://github.com/Kalimist/Unity-Remote-Tuning/blob/main/LICENSE",
+  "keywords": [
+    "tuning",
+    "runtime",
+    "websocket",
+    "mobile",
+    "debug",
+    "remote"
+  ],
+  "author": {
+    "name": "Kalimist",
+    "url": "https://github.com/Xtian2108"
+  }
+}
+

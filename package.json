@@ -15,6 +15,9 @@
     "debug",
     "remote"
   ],
+  "dependencies": {
+    "com.unity.textmeshpro": "3.0.6"
+  },
   "author": {
     "name": "Kalimist",
     "url": "https://github.com/Xtian2108"

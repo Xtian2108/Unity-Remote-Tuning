@@ -2,7 +2,8 @@
     "name": "RemoteTuning.Examples",
     "rootNamespace": "RemoteTuning.Examples",
     "references": [
-        "RemoteTuning.Runtime"
+        "RemoteTuning.Runtime",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

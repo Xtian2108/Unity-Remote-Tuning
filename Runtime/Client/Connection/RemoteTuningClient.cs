@@ -6,8 +6,8 @@ using RemoteTuning.Core.Protocol;
 using RemoteTuning.Core.Models;
 using RemoteTuning.Host.Server;
 
-// NativeWebSocket solo para Android/iOS builds
-#if UNITY_ANDROID || UNITY_IOS
+// NativeWebSocket solo disponible si el paquete com.endel.nativewebsocket esta instalado
+#if NATIVE_WEBSOCKET
 using NativeWebSocket;
 #endif
 
@@ -43,7 +43,7 @@ namespace RemoteTuning.Client.Connection
         public event Action<string> OnError;
         public event Action OnValuesUpdated;
 
-#if UNITY_ANDROID || UNITY_IOS
+#if NATIVE_WEBSOCKET
         private WebSocket _websocket;
 
         private void Start()
@@ -133,9 +133,9 @@ namespace RemoteTuning.Client.Connection
 
         private void Update()
         {
-            // NativeWebSocket requiere dispatch en el main thread
-            // CRÍTICO: Sin esto, los mensajes no se procesan en Android
-#if !UNITY_WEBGL && (UNITY_ANDROID || UNITY_IOS)
+            // NativeWebSocket requires manual dispatch on the main thread.
+            // Without this, messages are not processed on Android.
+#if !UNITY_WEBGL
             if (_websocket != null && isConnected)
             {
                 try
@@ -323,20 +323,21 @@ namespace RemoteTuning.Client.Connection
         }
 
 #else
-        // Placeholder para Editor/otras plataformas
+        // Stub activo cuando NativeWebSocket (com.endel.nativewebsocket) no esta instalado.
+        // El cliente no puede conectarse, pero el proyecto compila sin errores.
         private void Start()
         {
-            Debug.LogWarning("[RemoteTuningClient] NativeWebSocket only works on Android/iOS builds. Use SimpleTestClient in Editor.");
+            Debug.LogWarning("[RemoteTuningClient] NativeWebSocket is not installed. Install com.endel.nativewebsocket to enable mobile client connections.");
         }
 
         public void Connect(string host, int port)
         {
-            Debug.LogWarning("[RemoteTuningClient] Not available in Editor. Build for Android/iOS or use SimpleTestClient.");
+            Debug.LogWarning("[RemoteTuningClient] NativeWebSocket is not installed. Install com.endel.nativewebsocket.");
         }
 
         public void Connect(ConnectionInfo connectionInfo)
         {
-            Debug.LogWarning("[RemoteTuningClient] Not available in Editor.");
+            Debug.LogWarning("[RemoteTuningClient] NativeWebSocket is not installed. Install com.endel.nativewebsocket.");
         }
 
         public void Disconnect() { }

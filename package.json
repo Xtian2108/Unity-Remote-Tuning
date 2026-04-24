@@ -1,5 +1,5 @@
 ﻿{
-  "name": "com.kalimist.unity-remote-tuning",
+  "name": "com.xtian2108.unity-remote-tuning",
   "version": "1.0.0",
   "displayName": "Unity Remote Tuning",
   "description": "Runtime tuning tool for Unity. Adjust game variables from a mobile device in real time over a local WebSocket connection, with QR code pairing, presets and change history.",

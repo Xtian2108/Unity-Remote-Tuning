@@ -38,28 +38,30 @@ Alternatively, add the entry directly to your project's `Packages/manifest.json`
 ```json
 {
   "dependencies": {
-    "com.xtian2108.unity-remote-tuning": "https://github.com/xtian2108/Unity-Remote-Tuning.git",
+    "com.xtian2108.unity-remote-tuning": "https://github.com/Xtian2108/Unity-Remote-Tuning.git",
     ...
   }
 }
 ```
 
-> NativeWebSocket is **not** installed automatically. See the Requirements section below for manual setup.
+### Automatic dependencies
+
+`com.unity.textmeshpro` is declared as a dependency in `package.json` and is installed automatically by UPM. The two plugins inside `Plugins/` (`websocket-sharp.dll` and `zxing.unity.dll`) are bundled directly in the package and require no extra steps.
+
+### NativeWebSocket (optional — required for the mobile client)
+
+NativeWebSocket is a Git-only package and cannot be declared in `package.json` dependencies. The package compiles without it: `RemoteTuningClient` falls back to no-op stubs that log a warning. To enable full mobile client functionality, install it manually via **Window > Package Manager > + > Add package from git URL**:
+
+```
+https://github.com/endel/NativeWebSocket.git#upm
+```
+
+Once installed, the assembly definition detects the package and automatically defines the `NATIVE_WEBSOCKET` scripting symbol, activating the full `RemoteTuningClient` implementation with no extra configuration needed.
 
 ## Requirements
 
 - Unity 2020.3 or later
-- NativeWebSocket package (for Android/iOS client builds)
-- Included plugins:
-  - `websocket-sharp.dll` — WebSocket server embedded in the game
-  - `zxing.unity.dll` — QR code generation and scanning
-
-## Installation
-
-1. Copy the `Runtime`, `Plugins` and `Prefabs` folders into your Unity project under `Assets/`.
-2. Install the NativeWebSocket package via the Unity Package Manager (Git URL: `https://github.com/endel/NativeWebSocket.git#upm`).
-3. Add the `RemoteTuningHost` component (or use the provided `Online Remote Tuning.prefab`) to a GameObject in your scene.
-4. Register your variables in code (see Usage section below).
+- NativeWebSocket — optional, only needed to run `RemoteTuningClient` on Android/iOS (see above)
 
 ## Project structure
 
@@ -153,6 +155,8 @@ string url = _host.ConnectionInfo.GetWebSocketUrl(); // ws://192.168.x.x:8080
 ```
 
 ### 3. Connect from the client (mobile)
+
+> `RemoteTuningClient` requires NativeWebSocket to be installed. Without it the component compiles as stubs and logs a warning at runtime. See the [NativeWebSocket](#nativewebsocket-optional--required-for-the-mobile-client) section under Installation.
 
 Add `RemoteTuningClient` to a GameObject in the client scene (Android/iOS build). Point it to the server IP and port, or use `QRCodeScanner` to read the connection info automatically:
 

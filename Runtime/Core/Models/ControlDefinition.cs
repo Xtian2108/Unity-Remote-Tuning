@@ -28,6 +28,13 @@ namespace RemoteTuning.Core.Models
         public float minValue;
         public float maxValue;
         public float step;
+
+        // Slider-specific options
+        /// <summary>
+        /// When true, the slider will only allow whole number values.
+        /// Automatically set to true for Int value types; can also be enabled for Float sliders.
+        /// </summary>
+        public bool wholeNumbers;
         
         // Options for Dropdown/Enum (array instead of List)
         public string[] options;

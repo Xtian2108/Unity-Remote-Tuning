@@ -146,12 +146,13 @@ namespace RemoteTuning.Client.UI
                 Debug.LogWarning($"[DynamicUIBuilder] No label found for slider: {control.id}");
             }
 
-            // Configurar slider
+            // Configure slider
             var slider = widget.GetComponentInChildren<Slider>();
             if (slider != null)
             {
-                slider.minValue = control.minValue;
-                slider.maxValue = control.maxValue;
+                slider.minValue     = control.minValue;
+                slider.maxValue     = control.maxValue;
+                slider.wholeNumbers = control.wholeNumbers;
 
                 if (control.valueType == ValueType.Float)
                 {
@@ -160,10 +161,9 @@ namespace RemoteTuning.Client.UI
                 else if (control.valueType == ValueType.Int)
                 {
                     slider.value = control.intValue;
-                    slider.wholeNumbers = true;
                 }
 
-                // Agregar listener
+                // Add listener
                 slider.onValueChanged.AddListener((value) =>
                 {
                     OnSliderChanged(control, value, tmpLabel, regularLabel);

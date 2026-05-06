@@ -203,9 +203,9 @@ namespace RemoteTuning.Host.UI
             var slider = widget.GetComponentInChildren<Slider>();
             if (slider != null)
             {
-                slider.minValue = definition.minValue;
-                slider.maxValue = definition.maxValue;
-                slider.wholeNumbers = definition.valueType == ValueType.Int;
+                slider.minValue    = definition.minValue;
+                slider.maxValue    = definition.maxValue;
+                slider.wholeNumbers = definition.wholeNumbers;
                 slider.SetValueWithoutNotify(Mathf.Clamp(currentValue, slider.minValue, slider.maxValue));
 
                 slider.onValueChanged.AddListener((value) =>

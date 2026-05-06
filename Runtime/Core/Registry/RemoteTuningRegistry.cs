@@ -26,18 +26,31 @@ namespace RemoteTuning.Core.Registry
         /// <summary>
         /// Registers a float variable as a slider control.
         /// </summary>
+        /// <param name="id">Unique identifier for the variable.</param>
+        /// <param name="label">Display label shown in the UI.</param>
+        /// <param name="getter">Function that returns the current float value.</param>
+        /// <param name="setter">Action that applies a new float value.</param>
+        /// <param name="min">Minimum slider value. Defaults to 0.</param>
+        /// <param name="max">Maximum slider value. Defaults to 100.</param>
+        /// <param name="step">Step increment. Defaults to 0.1.</param>
+        /// <param name="defaultValue">Optional override for the reset default value.</param>
+        /// <param name="wholeNumbers">
+        /// When true, the slider will snap to whole number values even though the underlying type is float.
+        /// Defaults to false.
+        /// </param>
         public void RegisterFloat(string id, string label, Func<float> getter, Action<float> setter, 
-            float min = 0f, float max = 100f, float step = 0.1f, float? defaultValue = null)
+            float min = 0f, float max = 100f, float step = 0.1f, float? defaultValue = null, bool wholeNumbers = false)
         {
             var definition = new ControlDefinition
             {
-                id          = id,
-                label       = label,
-                controlType = ControlType.Slider,
-                valueType   = RemoteTuning.Core.Models.ValueType.Float,
-                minValue    = min,
-                maxValue    = max,
-                step        = step
+                id           = id,
+                label        = label,
+                controlType  = ControlType.Slider,
+                valueType    = RemoteTuning.Core.Models.ValueType.Float,
+                minValue     = min,
+                maxValue     = max,
+                step         = step,
+                wholeNumbers = wholeNumbers
             };
             var variable = new RegisteredVariable(
                 id,
@@ -52,18 +65,32 @@ namespace RemoteTuning.Core.Registry
         /// <summary>
         /// Registers an int variable as a slider control.
         /// </summary>
+        /// <param name="id">Unique identifier for the variable.</param>
+        /// <param name="label">Display label shown in the UI.</param>
+        /// <param name="getter">Function that returns the current int value.</param>
+        /// <param name="setter">Action that applies a new int value.</param>
+        /// <param name="min">Minimum slider value. Defaults to 0.</param>
+        /// <param name="max">Maximum slider value. Defaults to 100.</param>
+        /// <param name="step">Step increment. Defaults to 1.</param>
+        /// <param name="defaultValue">Optional override for the reset default value.</param>
+        /// <param name="wholeNumbers">
+        /// Whether the slider snaps to whole numbers. Defaults to true for int variables.
+        /// Can be set to false only in exceptional cases where fractional display is desired
+        /// while the underlying value is still stored as int.
+        /// </param>
         public void RegisterInt(string id, string label, Func<int> getter, Action<int> setter, 
-            int min = 0, int max = 100, int step = 1, int? defaultValue = null)
+            int min = 0, int max = 100, int step = 1, int? defaultValue = null, bool wholeNumbers = true)
         {
             var definition = new ControlDefinition
             {
-                id          = id,
-                label       = label,
-                controlType = ControlType.Slider,
-                valueType   = RemoteTuning.Core.Models.ValueType.Int,
-                minValue    = min,
-                maxValue    = max,
-                step        = step
+                id           = id,
+                label        = label,
+                controlType  = ControlType.Slider,
+                valueType    = RemoteTuning.Core.Models.ValueType.Int,
+                minValue     = min,
+                maxValue     = max,
+                step         = step,
+                wholeNumbers = wholeNumbers
             };
             var variable = new RegisteredVariable(
                 id,
